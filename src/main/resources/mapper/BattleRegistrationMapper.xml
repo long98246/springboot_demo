@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tencent.wxcloudrun.dao.BattleRegistrationMapper">
+
+    <resultMap id="BaseResultMap" type="com.tencent.wxcloudrun.model.BattleRegistration">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="star_coin" property="starCoin" jdbcType="INTEGER"/>
+        <result column="profession" property="profession" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="registration_time" property="registrationTime" jdbcType="TIMESTAMP"/>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.tencent.wxcloudrun.model.BattleRegistration" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO battle_registration (user_id, user_name, star_coin, profession, remark, registration_time, created_at, updated_at)
+        VALUES (#{userId}, #{userName}, #{starCoin}, #{profession}, #{remark}, #{registrationTime}, #{createdAt}, #{updatedAt})
+    </insert>
+
+    <select id="findByUserId" parameterType="string" resultMap="BaseResultMap">
+        SELECT * FROM battle_registration WHERE user_id = #{userId}
+    </select>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        SELECT * FROM battle_registration ORDER BY registration_time DESC
+    </select>
+
+    <delete id="deleteByUserId" parameterType="string">
+        DELETE FROM battle_registration WHERE user_id = #{userId}
+    </delete>
+
+    <update id="update" parameterType="com.tencent.wxcloudrun.model.BattleRegistration">
+        UPDATE battle_registration 
+        SET user_name = #{userName}, 
+            star_coin = #{starCoin}, 
+            profession = #{profession}, 
+            remark = #{remark}, 
+            updated_at = #{updatedAt}
+        WHERE user_id = #{userId}
+    </update>
+
+</mapper>
