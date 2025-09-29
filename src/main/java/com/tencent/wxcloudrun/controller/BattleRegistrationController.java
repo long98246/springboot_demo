@@ -15,7 +15,6 @@ import java.util.List;
  * 帮战报名控制器
  */
 @RestController
-@RequestMapping("/api/battle")
 public class BattleRegistrationController {
 
     private final BattleRegistrationService battleRegistrationService;
@@ -28,8 +27,10 @@ public class BattleRegistrationController {
 
     /**
      * 报名帮战
+     * @param request {@link BattleRegistrationRequest}
+     * @return API response json
      */
-    @PostMapping("/register")
+    @PostMapping(value = "/api/battle/register")
     public ApiResponse register(@RequestBody BattleRegistrationRequest request) {
         logger.info("/api/battle/register post request, userId: {}", request.getUserId());
         
@@ -44,8 +45,9 @@ public class BattleRegistrationController {
 
     /**
      * 获取所有报名记录
+     * @return API response json
      */
-    @GetMapping("/registrations")
+    @GetMapping(value = "/api/battle/registrations")
     public ApiResponse getAllRegistrations() {
         logger.info("/api/battle/registrations get request");
         
@@ -60,8 +62,10 @@ public class BattleRegistrationController {
 
     /**
      * 根据用户ID获取报名记录
+     * @param userId 用户ID
+     * @return API response json
      */
-    @GetMapping("/registration/{userId}")
+    @GetMapping(value = "/api/battle/registration/{userId}")
     public ApiResponse getRegistrationByUserId(@PathVariable String userId) {
         logger.info("/api/battle/registration/{} get request", userId);
         
@@ -76,8 +80,10 @@ public class BattleRegistrationController {
 
     /**
      * 取消报名
+     * @param userId 用户ID
+     * @return API response json
      */
-    @DeleteMapping("/registration/{userId}")
+    @DeleteMapping(value = "/api/battle/registration/{userId}")
     public ApiResponse cancelRegistration(@PathVariable String userId) {
         logger.info("/api/battle/registration/{} delete request", userId);
         
@@ -96,8 +102,10 @@ public class BattleRegistrationController {
 
     /**
      * 更新报名信息
+     * @param request {@link BattleRegistrationRequest}
+     * @return API response json
      */
-    @PutMapping("/registration")
+    @PutMapping(value = "/api/battle/registration")
     public ApiResponse updateRegistration(@RequestBody BattleRegistrationRequest request) {
         logger.info("/api/battle/registration put request, userId: {}", request.getUserId());
         
